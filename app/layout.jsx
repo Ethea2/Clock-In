@@ -1,3 +1,5 @@
+import { NextAuthProvider } from './Providers'
+import Navbar from './components/Navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -11,7 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <NextAuthProvider>
+        <body className={inter.className}>
+          <Navbar />
+          {children}
+        </body>
+      </NextAuthProvider>
     </html>
   )
 }
