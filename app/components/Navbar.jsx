@@ -68,7 +68,7 @@ export default function Navbar() {
                                         status === 'authenticated' ?
                                             (
                                                 <button
-                                                    onClick={() => signOut()}
+                                                    onClick={() => signOut({ callbackUrl: '/' })}
                                                     className='bg-slate-900 text-white rounded-md px-6 py-2'>
                                                     Sign Out
                                                 </button>
@@ -76,7 +76,7 @@ export default function Navbar() {
                                             :
                                             (
                                                 <button
-                                                    onClick={() => signIn('google')}
+                                                    onClick={() => signIn('google', { callbackUrl: '/homepage' })}
                                                     className='bg-slate-900 text-white rounded-md px-6 py-2'>
                                                     Sign In
                                                 </button>
