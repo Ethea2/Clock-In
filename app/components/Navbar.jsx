@@ -49,10 +49,11 @@ export default function Navbar() {
                             </div>
                         </div>
                         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+                            {session?.user?.name}
                             {
                                 status === 'authenticated' &&
                                 <Image src={session?.user?.image} width={35} height={20} className='rounded-lg' />
-
                             }
                             <div class="relative flex flex-col ml-3">
                                 {/* <div>
