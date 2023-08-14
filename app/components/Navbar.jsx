@@ -1,13 +1,10 @@
 'use client'
 import React from 'react'
-import Image from 'next/image'
-import { signIn, signOut, useSession } from 'next-auth/react'
 
 export default function Navbar() {
-    const { status, data: session } = useSession()
-    console.log(session)
     return (
         <>
+<<<<<<< HEAD
             <nav class="bg-gray-800">
                 <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div class="relative flex h-16 items-center justify-between">
@@ -103,14 +100,18 @@ export default function Navbar() {
                                 </div> */}
                             </div>
                         </div>
+=======
+            <nav class="w-full h-full p-4 bg-gradient-to-r from-[#A0505C] to-[#693052] rounded-xl">
+                <div className="nav-links" class="flex flex-col items-center border border-white h-full justify-evenly">
+                    <div className="user-page">
+                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="5" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M20 21C20 16.5817 16.4183 13 12 13C7.58172 13 4 16.5817 4 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M20 21C20 16.5817 16.4183 13 12 13C7.58172 13 4 16.5817 4 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+>>>>>>> b6c1901cc3698557ddf2e6197cc3441ef14a3416
                     </div>
-                </div>
-                <div class="sm:hidden" id="mobile-menu">
-                    <div class="space-y-1 px-2 pb-3 pt-2">
-                        <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                    <div className="teams-page">
+                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="4" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M16 19C16 15.6863 12.866 13 9 13C5.13401 13 2 15.6863 2 19" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M15 13C17.2091 13 19 11.2091 19 9C19 6.79086 17.2091 5 15 5C13.8053 5 12.7329 5.52375 12 6.35418" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M22 19C22 15.6863 18.866 13 15 13C14.1928 13 12.897 12.7069 12 11.7655" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                    </div>
+                    <div className="history">
+                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 16V11M12 16V8M16 16V14M18 4L6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4Z" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
                     </div>
                 </div>
             </nav>
