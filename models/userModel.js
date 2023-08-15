@@ -16,10 +16,11 @@ const userSchema = new Schema({
         type: String,
         required: false,
     },
-    timeRef: {
+    timeRef: [{
         type: Schema.Types.ObjectId,
+        ref: 'Time',
         required: false
-    }
+    }]
 }, { timestamps: true })
 
 
