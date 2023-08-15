@@ -30,6 +30,7 @@ export async function POST(request) {
         if (time.timeout || time.hours) {
             return NextResponse.json({ message: 'has already timed out.'})
         }
+        
         time.timeout = new Date()
         time.hours = hours
         await time.save()

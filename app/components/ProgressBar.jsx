@@ -66,8 +66,27 @@ export default function ProgressBar() {
   }
 
   const clockOut = () => {
+
+    const clockout = async () => {
+      const res = await fetch('http://localhost:3000/api/timeout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({
+          "email" : session?.user?.email,
+        })
+      })  
+      const json = await res.json()
+
+      if(res.ok) {
+        console.log(json.message)
+      }
+    }
     setRunning(false)
     setClockedIn(false)
+    clockout()
+    
   }
 
   const formatTime = (time) => {

@@ -5,6 +5,7 @@ import ProgressBar from '../components/ProgressBar'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import ClockInCalendar from '../components/ClockInCalendar'
 
 export default function Homepage() {
   const { status, data: session, loading } = useSession()
@@ -31,13 +32,13 @@ export default function Homepage() {
             </div>
           </div>
 
-          <div className="p-4 border border-white bg-gradient-to-b from-gray-500 to-gray-700 flex items-center gap-4 px-10 rounded-3xl flex-auto">
+          <div className="p-4 border border-white bg-gradient-to-b from-gray-500 to-gray-700 flex items-center gap-4 rounded-3xl flex-auto">
             <ProgressBar />
           </div>
         </div>
 
-        <div className="border border-white">
-          <p>calendar</p>
+        <div className="px-4">
+          <ClockInCalendar/>
         </div>
       </div>
 
