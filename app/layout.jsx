@@ -1,6 +1,8 @@
 import { NextAuthProvider } from './Providers'
 import './globals.css'
 import { Poppins } from 'next/font/google'
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const poppins = Poppins({ weight: '300', subsets: ['latin'] })
 
@@ -14,6 +16,18 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <NextAuthProvider>
         <body className={poppins.className} class="w-screen h-screen flex">
+          <ToastContainer
+            position="bottom-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />  
           {children}
         </body>
       </NextAuthProvider>

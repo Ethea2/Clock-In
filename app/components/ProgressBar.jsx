@@ -2,14 +2,16 @@
 import { useSession } from 'next-auth/react'
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 export default function ProgressBar() {
-  const {data: session} = useSession()
+  const { data: session } = useSession()
   const [clockedIn, setClockedIn] = useState(false)
   const [time, setTime] = useState(0)
   const [isRunning, setRunning] = useState(false)
   const [progress, setProgress] = useState(0);
   const [paused, setPaused] = useState(false)
+  let timer;
 
   const totalDuration = 4 * 60 * 60; // 4 hours in seconds
 
@@ -21,11 +23,10 @@ export default function ProgressBar() {
   }, []);
 
   useEffect(() => {
-    let timer;
     if (isRunning) {
       timer = setInterval(() => {
         setTime((current) => current + 1)
-        setProgress((time / totalDuration) * 100);
+        setProgress((time/totalDuration) * 100);
         localStorage.setItem('time', JSON.stringify({ currentTime: time, clockedIn: true, isRunning }))
       }, 1000)
     }
@@ -38,20 +39,22 @@ export default function ProgressBar() {
       const res = await fetch('http://localhost:3000/api/timein', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json' 
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "email" : session?.user?.email
+          "email": session?.user?.email
         })
-      })  
+      })
       const json = await res.json()
 
-      if(res.ok) {
-        console.log(json.message)
+      if (res.ok) {
+        toast(json.message)
+        setRunning(true)
+        setClockedIn(true)
+      } else {
+        toast(json.message)
       }
     }
-    setRunning(true)
-    setClockedIn(true)
     clockin()
   }
 
@@ -71,24 +74,25 @@ export default function ProgressBar() {
       const res = await fetch('http://localhost:3000/api/timeout', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json' 
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "email" : session?.user?.email,
-          "hours" : Math.floor(time/3600)
+          "email": session?.user?.email,
+          "hours": Math.floor(time / 3600)
         })
-      })  
+      })
       const json = await res.json()
 
-      if(res.ok) {
+      if (res.ok) {
+        setRunning(false)
+        setClockedIn(false)
+        setTime(0)
         localStorage.removeItem('time')
-        console.log(json.message)
+      } else {
+        toast(json.message)
       }
     }
-    setRunning(false)
-    setClockedIn(false)
     clockout()
-    
   }
 
   const formatTime = (time) => {
@@ -109,7 +113,7 @@ export default function ProgressBar() {
           <p className="text-xs"> {hours} hours {minutes} mins {seconds} secs</p>
           {/* <progress value={progress} max="100" className="h-10 w-2/3 border rounded-xl overflow-hidden"></progress> */}
           <div className="h-10 w-2/3 border rounded-xl overflow-hidden bg-white">
-            <div className="flex items-center justify-center h-64 bg-gradient-to-r from-blue-400 to-orange-500 via-purple-500 animate-gradient-x" style={{width: `${progress}%`}}>
+            <div className="flex items-center justify-center h-64  transition-width transition-slowest ease bg-gradient-to-r from-blue-400 to-orange-500 via-purple-500 animate-gradient-x" style={{ width: `${progress}%` }}>
             </div>
           </div>
         </div>
