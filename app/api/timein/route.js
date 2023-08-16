@@ -20,12 +20,12 @@ export async function POST(request) {
     try {
         user = await User.findOne({ email })
         if (!user) {
-            return NextResponse.json({ message: 'user does not exist' }, {status: 404});
+            return NextResponse.json({ message: 'user does not exist' }, { status: 404 });
         }
         if (user) {
             const timeExists = await Time.findOne({ userRef: user._id, date: today })
             if (timeExists) {
-                return NextResponse.json({ message: "You already clocked in today" }, { status: 404})
+                return NextResponse.json({ message: "You already clocked in today" }, { status: 404 })
             }
 
             const newTime = await Time.create({ userRef: user._id })
@@ -37,7 +37,7 @@ export async function POST(request) {
             await user.save()
             return NextResponse.json({ message: "clocked in successfully!" })
         }
-        return NextResponse.json({ message: 'user does not exist' })
+        return NextResponse.json({ message: 'user does not exist' }, { status: 404 })
     } catch (e) {
         console.log(e)
         return NextResponse.json({ message: e }, { status: 500 })

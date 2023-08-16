@@ -21,21 +21,21 @@ export async function POST(request) {
     try {
         user = await User.findOne({ email })
         if (!user) {
-            return NextResponse.json({ message: 'user does not exist' })
+            return NextResponse.json({ message: 'user does not exist' }, { status: 404 })
         }
         time = await Time.findOne({ userRef: user._id, date: today })
         if (!time) {
-            return NextResponse.json({ message: 'has not clocked in' })
+            return NextResponse.json({ message: 'has not clocked in' }, { status: 404 })
         }
         if (time.timeout || time.hours) {
-            return NextResponse.json({ message: 'has already timed out.'})
+            return NextResponse.json({ message: 'has already timed out.' }, { status: 404 })
         }
-        
+
         time.timeout = new Date()
         time.hours = hours
         await time.save()
         // const success = await Time.findOneAndUpdate({ time }, { hours, timeout: new Date() })
-        return NextResponse.json({ time })
+        return NextResponse.json({ time, message: 'Successfully timed out!' })
 
     } catch (e) {
         console.log(e)

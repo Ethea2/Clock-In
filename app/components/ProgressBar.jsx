@@ -75,11 +75,13 @@ export default function ProgressBar() {
         },
         body: JSON.stringify({
           "email" : session?.user?.email,
+          "hours" : Math.floor(time/3600)
         })
       })  
       const json = await res.json()
 
       if(res.ok) {
+        localStorage.removeItem('time')
         console.log(json.message)
       }
     }
