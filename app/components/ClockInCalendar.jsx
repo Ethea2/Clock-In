@@ -25,7 +25,7 @@ export default function ClockInCalendar() {
       }
       fetchData()
     }
-  }, [session, loading]) //figure out highlighting.
+  }, [session]) //figure out highlighting.
   return (
     <div>
       <Calendar onChange={setDate} value={date}
